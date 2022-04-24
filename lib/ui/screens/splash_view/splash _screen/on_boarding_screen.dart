@@ -1,12 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../business_logic/onboarding_logic/onboarding_cubit.dart';
-import '../../../../constants/data_constants/assets_manager.dart';
-import '../../../../constants/design_constants/colors_manager.dart';
-import '../../../../data/model/onboarrding_model.dart';
-import '../../main_screen.dart';
+import '../../../../constants/data_constants/collections_manager.dart';
 import '../splash _components/custom_indicator.dart';
 import '../splash _components/on_boarding_slider.dart';
 
@@ -17,56 +12,39 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<OnBoardingModel> onBoardingList = [
-      OnBoardingModel(
-          image: ImageAssets.onBoardingImage1,
-          title:' تريد حياة صحية',
-       ),
-      OnBoardingModel(
-          image: ImageAssets.onBoardingImage2,
-          title:'تبحث عن وصفات صحية ولذية',
-         ),
-      OnBoardingModel(
-          image: ImageAssets.onBoardingImage3,
-          title:'حضر بنفسك وجبتك الصحية اللذيذة',
-         ),
-      OnBoardingModel(
-          image: ImageAssets.onBoardingImage4,
-          title:'واستمتع بالمذاق الطيب')
-
-    ];
-
+    OnBoardingCubit  onBoardingCubit = OnBoardingCubit();
     return SafeArea(
       child: Scaffold(
-        body: BlocProvider(
-          create: (context) => OnBoardingCubit(),
+        body: BlocProvider.value(
+          value:onBoardingCubit,
           child: BlocConsumer<OnBoardingCubit, OnBoardingState>(
             listener: (context, state) {},
             builder: (context, state) {
+
               return Column(
-                   mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.6,
                     child: PageView.builder(
                         controller: boardController,
                         onPageChanged: (index) {
-                          OnBoardingCubit.get(context)
+                          onBoardingCubit
                               .changeIndexOfOnBoardingPageView(
-                                  index, onBoardingList);
+                                  index, CollectionsManager.onBoardingList);
                         },
                         physics: const BouncingScrollPhysics(),
-                        itemCount: onBoardingList.length,
-                        itemBuilder: (c, i) =>
-                            OnBoardingSlider(onBoardingList, i)),
+                        itemCount: CollectionsManager.onBoardingList.length,
+                        itemBuilder: (c, i) => OnBoardingSlider(
+                            CollectionsManager.onBoardingList, i)),
                   ),
                   CustomIndicator(
-                    onBoardingList: onBoardingList,
-                    index: OnBoardingCubit.get(context)
-                        .indexOfOnBoardingPageView,
+                    onBoardingList: CollectionsManager.onBoardingList,
+                    indexOfOnBoarding:
+                    onBoardingCubit.indexOfOnBoardingPageView,
                     boardController: boardController,
-                    isLast: OnBoardingCubit.get(context).isLastIndex,
-
+                    isLast: onBoardingCubit.isLastIndex,
+                    onBoardingCubit: onBoardingCubit,
                   ),
                   const SizedBox(
                     height: 50,

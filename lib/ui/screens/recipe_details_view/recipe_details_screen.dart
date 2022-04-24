@@ -1,14 +1,17 @@
 import 'package:avocado_healthy_food/constants/design_constants/colors_manager.dart';
 import 'package:flutter/material.dart';
-import '../../../business_logic/App_logic/App_cubit.dart';
+import '../../../business_logic/app_logic/app_cubit.dart';
 import '../../../data/model/recipe_model.dart';
 import '../../widgets/custom_icon_button.dart';
 
 class RecipeDetails extends StatelessWidget {
-  const RecipeDetails({Key? key, required this.list , required this.indexOfRecipeList,}) : super(key: key);
+  const RecipeDetails({
+    Key? key,
+    required this.list,
+    required this.indexOfRecipeList,
+  }) : super(key: key);
   final List<RecipeModel> list;
- final  int indexOfRecipeList ;
-
+  final int indexOfRecipeList;
 
   @override
   Widget build(BuildContext context) {
@@ -18,27 +21,32 @@ class RecipeDetails extends StatelessWidget {
           PositionedDirectional(
             top: 0,
             height: MediaQuery.of(context).size.height * 0.4,
-            child:  BuildRecipeImage(image: list[indexOfRecipeList].image),
+            child: BuildRecipeImage(image: list[indexOfRecipeList].image),
           ),
           PositionedDirectional(
             top: MediaQuery.of(context).size.height * 0.3,
-            child:  BuildRecipeDetails(indexOfRecipeList:indexOfRecipeList ,list:list),
+            child: BuildRecipeDetails(
+                indexOfRecipeList: indexOfRecipeList, list: list),
           ),
           PositionedDirectional(
             top: 35,
             start: 20,
-            child:CustomIconButton(icon: Icons.adaptive.arrow_back ,onPressed: (){
-              Navigator.of(context).pop();
-            }),
-
+            child: CustomIconButton(
+                icon: Icons.adaptive.arrow_back,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                }),
           ),
-           PositionedDirectional(
+          PositionedDirectional(
             top: 35,
             end: 20,
-            child:CustomIconButton(
-                icon: list[indexOfRecipeList].isBookMark ?Icons.bookmarks :Icons.bookmarks_outlined ,
-                onPressed:(){
-                  AppCubit.get(context).changeBookMark(list[indexOfRecipeList].title);
+            child: CustomIconButton(
+                icon: list[indexOfRecipeList].isBookMark
+                    ? Icons.bookmarks
+                    : Icons.bookmarks_outlined,
+                onPressed: () {
+                  AppCubit.get(context)
+                      .changeBookMark(list[indexOfRecipeList].title);
                 }),
           ),
         ],
@@ -48,24 +56,25 @@ class RecipeDetails extends StatelessWidget {
 }
 
 class BuildRecipeImage extends StatelessWidget {
- final String image;
+  final String image;
 
-  const BuildRecipeImage({Key? key,required this.image}) : super(key: key);
+  const BuildRecipeImage({Key? key, required this.image}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      child: Image.asset(image,
-          fit: BoxFit.cover),
+      child: Image.asset(image, fit: BoxFit.cover),
     );
   }
 }
 
 class BuildRecipeIngredients extends StatelessWidget {
-  const BuildRecipeIngredients({Key? key, required this.list, required this.indexOfRecipeList}) : super(key: key);
+  const BuildRecipeIngredients(
+      {Key? key, required this.list, required this.indexOfRecipeList})
+      : super(key: key);
   final List<RecipeModel> list;
-  final  int indexOfRecipeList ;
+  final int indexOfRecipeList;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -85,7 +94,7 @@ class BuildRecipeIngredients extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Center(
                   child: Text(
-                    list[indexOfRecipeList].ingredients[index],
+                list[indexOfRecipeList].ingredients[index],
                 style: Theme.of(context).textTheme.titleLarge,
               )),
             ),
@@ -97,9 +106,11 @@ class BuildRecipeIngredients extends StatelessWidget {
 }
 
 class BuildRecipePreparation extends StatelessWidget {
-  const BuildRecipePreparation({Key? key, required this.list, required this.indexOfRecipeList}) : super(key: key);
+  const BuildRecipePreparation(
+      {Key? key, required this.list, required this.indexOfRecipeList})
+      : super(key: key);
   final List<RecipeModel> list;
-  final  int indexOfRecipeList ;
+  final int indexOfRecipeList;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -108,11 +119,9 @@ class BuildRecipePreparation extends StatelessWidget {
       child: ListWheelScrollView.useDelegate(
         itemExtent: 75,
         childDelegate: ListWheelChildBuilderDelegate(
-
           builder: (BuildContext context, int index) {
             if (index < 0 ||
-                index >
-                    list[indexOfRecipeList].preparation.length - 1) {
+                index > list[indexOfRecipeList].preparation.length - 1) {
               return null;
             }
             return ListTile(
@@ -134,9 +143,11 @@ class BuildRecipePreparation extends StatelessWidget {
 }
 
 class BuildRecipeDetails extends StatelessWidget {
-  const BuildRecipeDetails({Key? key, required this.list, required this.indexOfRecipeList}) : super(key: key);
+  const BuildRecipeDetails(
+      {Key? key, required this.list, required this.indexOfRecipeList})
+      : super(key: key);
   final List<RecipeModel> list;
-  final  int indexOfRecipeList ;
+  final int indexOfRecipeList;
 
   @override
   Widget build(BuildContext context) {
@@ -148,10 +159,10 @@ class BuildRecipeDetails extends StatelessWidget {
             topStart: Radius.circular(40),
             topEnd: Radius.circular(40),
           ),
-          // color: ColorsManager.grayTrans,
+           // color: ColorsManager.primaryColor,
           boxShadow: [
             BoxShadow(
-                color: ColorsManager.primaryColor,
+                 color: ColorsManager.primaryColor,
                 spreadRadius: 0,
                 blurRadius: 1),
           ]),
@@ -177,7 +188,8 @@ class BuildRecipeDetails extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                 BuildRecipeIngredients(indexOfRecipeList:indexOfRecipeList ,list:list),
+                BuildRecipeIngredients(
+                    indexOfRecipeList: indexOfRecipeList, list: list),
                 const SizedBox(
                   height: 30,
                 ),
@@ -189,7 +201,8 @@ class BuildRecipeDetails extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                 BuildRecipePreparation(indexOfRecipeList:indexOfRecipeList ,list:list),
+                BuildRecipePreparation(
+                    indexOfRecipeList: indexOfRecipeList, list: list),
               ],
             ),
           )),

@@ -1,83 +1,90 @@
-
-
 import 'package:avocado_healthy_food/constants/routes.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../business_logic/onboarding_logic/onboarding_cubit.dart';
 import '../../../../constants/design_constants/colors_manager.dart';
-import '../../../../constants/design_constants/sizes_manager.dart';
 import '../../../../data/model/onboarrding_model.dart';
-import '../../main_screen.dart';
 
-
-
-
-class CustomIndicator extends StatefulWidget {
-
-
-  int index=0;
+class CustomIndicator extends StatelessWidget {
+  int indexOfOnBoarding = 0;
   PageController boardController;
   List<OnBoardingModel> onBoardingList;
-  bool isLast ;
+  bool isLast;
+  OnBoardingCubit onBoardingCubit;
 
-
-   CustomIndicator({Key? key, required this.index, required this.onBoardingList, required this.boardController , required this.isLast ,}) : super(key: key);
-
-  @override
-  State<CustomIndicator> createState() => _CustomIndicatorState();
-}
-
-class _CustomIndicatorState extends State<CustomIndicator> {
-
+  CustomIndicator({
+    Key? key,
+    required this.indexOfOnBoarding,
+    required this.onBoardingList,
+    required this.boardController,
+    required this.isLast,
+    required this.onBoardingCubit,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return   Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Align(
-              alignment: AlignmentDirectional.centerEnd,
-              child: TextButton(
-                onPressed: () {
-                  // OnBoardingCubit.get(context).changeIsSkip();
-                  Navigator.pushReplacementNamed(context, Routes.homeScreenRoute);
-                },
-                child: const Text(
-                  'SKIP',
-                  textAlign: TextAlign.end,style: TextStyle(color: ColorsManager.primaryColor),
+    return BlocProvider.value(
+      value: onBoardingCubit,
+      child: BlocBuilder<OnBoardingCubit, OnBoardingState>(
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Align(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: TextButton(
+                      onPressed: () {
+                        onBoardingCubit.changeIsSkip();
+                        Navigator.pushReplacementNamed(
+                            context, Routes.homeScreenRoute);
+                      },
+                      child: const Text(
+                        'SKIP',
+                        textAlign: TextAlign.end,
+                        style: TextStyle(color: ColorsManager.primaryColor),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                Row(
+                  children: List.generate(
+                      onBoardingList.length,
+                          (index) =>
+                      index == indexOfOnBoarding
+                          ? const ActiveDot()
+                          : const InactiveDot()),
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      if (isLast) {
+                        onBoardingCubit.changeIsSkip();
+                        Navigator.pushReplacementNamed(
+                            context, Routes.homeScreenRoute);
+                      } else {
+                        boardController.nextPage(
+                            duration: const Duration(milliseconds: 750),
+                            curve: Curves.easeInBack);
+                      }
+                    },
+                    child: const Icon(Icons.arrow_forward_ios),
+                    style: ElevatedButton.styleFrom(
+                      primary: ColorsManager.primaryColor,
+                      shape: const CircleBorder(),
+                    )),
+              ],
             ),
-          ),
-          Row(children: List.generate(
-              widget.onBoardingList.length,
-                  (index) => widget.index == index ? const ActiveDot() : const InactiveDot()),
-          ),
-          ElevatedButton(
-            onPressed: (){
-            if (widget.isLast){
-
-              Navigator.pushReplacementNamed(context, Routes.homeScreenRoute);
-            }
-            else {
-
-            widget.boardController.nextPage(duration: const Duration(milliseconds: 750), curve: Curves.easeInBack);
-            }
-
-          }, child: const Icon(Icons.arrow_forward_ios),
-            style: ElevatedButton.styleFrom(
-               primary: ColorsManager.primaryColor,
-                shape:CircleBorder(),
-            )
-          ),
-
-        ],),
+          );
+        },
+      ),
     );
   }
+
 }
+
 
 class ActiveDot extends StatelessWidget {
   const ActiveDot({Key? key}) : super(key: key);
@@ -109,7 +116,7 @@ class InactiveDot extends StatelessWidget {
         width: 8,
         height: 8,
         decoration: BoxDecoration(
-          color:  ColorsManager.primaryColor.withOpacity(0.6),
+          color: ColorsManager.primaryColor.withOpacity(0.6),
           borderRadius: BorderRadius.circular(5),
         ),
       ),

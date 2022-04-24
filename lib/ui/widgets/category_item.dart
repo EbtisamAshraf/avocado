@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import '../../constants/design_constants/colors_manager.dart';
 
@@ -24,7 +23,9 @@ class CategoryItem extends StatelessWidget {
         curve: Curves.fastOutSlowIn,
         padding: padding,
         decoration: BoxDecoration(
-          color: isSelected ? ColorsManager.primaryColor.withOpacity(0.7) : ColorsManager.grayTrans,
+          color: isSelected
+              ? ColorsManager.primaryColor.withOpacity(0.7)
+              : ColorsManager.grayTrans,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
@@ -36,15 +37,15 @@ class CategoryItem extends StatelessWidget {
           ],
         ),
         child: Text(
-              data["name"],
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 16,
-                color: isSelected ? ColorsManager.white : ColorsManager.black,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+          data["name"],
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontSize: 16,
+            color: isSelected ? ColorsManager.white : ColorsManager.black,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
     );
   }

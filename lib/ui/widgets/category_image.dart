@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/design_constants/colors_manager.dart';
+
 class CustomImage extends StatelessWidget {
   const CustomImage(this.image,
       {Key? key,
-        this.width = 100,
-        this.height = 100,
-        this.bgColor,
-        this.borderWidth = 0,
-        this.borderColor,
-        this.trBackground = false,
-        this.fit = BoxFit.cover,
-        this.isNetwork = true,
-        this.radius = 50,
-        this.borderRadius,
-        this.isShadow = true})
+      this.width = 100,
+      this.height = 100,
+      this.bgColor,
+      this.borderWidth = 0,
+      this.borderColor,
+      this.trBackground = false,
+      this.fit = BoxFit.cover,
+      this.isNetwork = true,
+      this.radius = 50,
+      this.borderRadius,
+      this.isShadow = true})
       : super(key: key);
   final String image;
   final double width;
@@ -47,7 +48,6 @@ class CustomImage extends StatelessWidget {
               ),
           ],
         ),
-        child: Image.asset(image)
-    );
+        child: Image.asset(image));
   }
 }

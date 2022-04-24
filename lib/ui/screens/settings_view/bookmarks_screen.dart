@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../business_logic/App_logic/App_cubit.dart';
+import '../../../business_logic/app_logic/app_cubit.dart';
 import '../../../constants/routes.dart';
-import '../../../data/model/home_model.dart';
 import '../../../data/model/recipe_model.dart';
 import '../../widgets/recipe_card2.dart';
 

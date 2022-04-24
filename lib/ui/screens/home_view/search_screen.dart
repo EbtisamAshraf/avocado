@@ -1,12 +1,12 @@
+import 'package:avocado_healthy_food/business_logic/app_logic/app_cubit.dart';
 import 'package:avocado_healthy_food/constants/design_constants/colors_manager.dart';
 import 'package:flutter/material.dart';
-
-import '../../../constants/data_constants/assets_manager.dart';
+import '../../../constants/routes.dart';
+import '../../../data/model/recipe_model.dart';
 import '../../widgets/recipe_card2.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
-
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -14,66 +14,86 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
 
-  List searched = [];
-
+  List<RecipeModel>  searched = [];
+  bool isSearching = false;
   TextEditingController searchController = TextEditingController();
-
   @override
   void initState() {
     searched.clear();
     super.initState();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:ColorsManager.primaryColor ,
+        backgroundColor: ColorsManager.primaryColor,
         elevation: 0.0,
         title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10 ),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: TextField(
-            controller:searchController ,
-            cursorColor:ColorsManager.primaryColor,
-            decoration:   const InputDecoration(
-              prefixIcon: Icon(Icons.search),
+            controller: searchController,
+            style: const TextStyle(color: ColorsManager.primaryColorDark),
+            cursorColor: ColorsManager.primaryColor,
+            decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.search ,color:ColorsManager.primaryColorDark ),
               fillColor: ColorsManager.white,
-               filled: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 15 ,),
+              filled: true,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 15,
+              ),
               hintText: 'بحث',
+
             ),
-            onChanged: (value){
+            onChanged: (value) {
 
               setState(() {
+                isSearching = true;
                 if (value == '' || value == ' ' ){
-                  // searched.clear();
-                } else {
-                  // searched = Repo.generalSpecialties.where((element) => element[0].toString().toLowerCase().contains(value)).toList();
+                  searched.clear();
                 }
+                else {
+             searched =  AppCubit.get(context).recipesList.where((element) =>element.title.toLowerCase().toString().contains(value) ).toList();
+              }
               });
 
             },
           ),
         ),
-        // leading: IconButton(icon:Icon(Icons.arrow_back) ,onPressed: (){},),
-
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
-            children: const [
-              // RecipeCard2(title:'مخبوزات الجزيرة' ,category:'وجبات' ,image: ImageAssets.bakery),
-              // RecipeCard2(title:'مخبوزات الجزيرة' ,category:'وجبات' ,image: ImageAssets.bakery),
-              // RecipeCard2(title:'مخبوزات الجزيرة' ,category:'وجبات' ,image: ImageAssets.bakery),
-              // RecipeCard2(title:'مخبوزات الجزيرة' ,category:'وجبات' ,image: ImageAssets.bakery),
-              // RecipeCard2(title:'مخبوزات الجزيرة' ,category:'وجبات' ,image: ImageAssets.bakery),
-              // RecipeCard2(title:'مخبوزات الجزيرة' ,category:'وجبات' ,image: ImageAssets.bakery),
-
-            ],
+            children: List.generate(
+                isSearching ?   searched.length :  AppCubit.get(context).recipesList.length,
+                (index) =>  isSearching ? RecipeCard2(
+                      indexOfRecipeList: index,
+                      list: searched ,
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          Routes.recipeDetailsScreenRoute,
+                          arguments: Arguments(
+                            searched,
+                              index.toInt()),
+                        );
+                      },
+                    ): RecipeCard2(
+                  indexOfRecipeList: index,
+                  list: AppCubit.get(context).recipesList,
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      Routes.recipeDetailsScreenRoute,
+                      arguments: Arguments(
+                          AppCubit.get(context).recipesList,
+                          index.toInt()),
+                    );
+                  },
+                )),
           ),
         ),
       ),

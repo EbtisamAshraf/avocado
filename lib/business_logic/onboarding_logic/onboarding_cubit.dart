@@ -1,10 +1,8 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-
-import '../../data/local_data/ shared_preferences/shared_pref.dart';
+import '../../data/local_data/shared_preferences/shared_pref.dart';
 import '../../data/model/onboarrding_model.dart';
 part 'onboarding_state.dart';
 
@@ -13,11 +11,10 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
 
 
 
- static OnBoardingCubit get(context)=> BlocProvider.of(context);
+ // static OnBoardingCubit get(context)=> BlocProvider.of(context);
 
  bool isLastIndex = false;
  bool isSkip = false;
-
  int indexOfOnBoardingPageView = 0;
 
 

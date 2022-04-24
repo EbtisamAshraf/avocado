@@ -1,7 +1,7 @@
 import 'package:avocado_healthy_food/constants/data_constants/assets_manager.dart';
 import 'package:avocado_healthy_food/constants/routes.dart';
 import 'package:flutter/material.dart';
-import '../../../business_logic/App_logic/App_cubit.dart';
+import '../../../business_logic/app_logic/app_cubit.dart';
 import '../../../constants/design_constants/colors_manager.dart';
 
 class SettingsScreen extends StatelessWidget {

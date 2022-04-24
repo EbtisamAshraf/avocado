@@ -2,9 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../../../constants/data_constants/assets_manager.dart';
 import '../../../../constants/routes.dart';
-import '../../../../data/local_data/ shared_preferences/shared_pref.dart';
-import '../../home_view/home_screen.dart';
-import '../../home_view/home_screen.dart';
+import '../../../../data/local_data/shared_preferences/shared_pref.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen( {Key? key}) : super(key: key);
@@ -27,10 +26,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   nextScreen() {
-     bool? isSkip =  false;
-    // bool? isSkip =  SharedPref.getBoolData(key: 'isSkip') ; // todo changeIsSkip in nextButton
+
+    bool? isSkip =  SharedPref.getBoolData(key: 'isSkip') ;
+
     if(isSkip == true){
-      Navigator.pushReplacementNamed(context, Routes.mainScreenRoute,  );
+      Navigator.pushReplacementNamed(context, Routes.homeScreenRoute,  );
     }
     else {
       Navigator.pushReplacementNamed(context, Routes.onBoardingRoute,  );
@@ -44,8 +44,8 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.4,
-          height:  MediaQuery.of(context).size.width * 0.4,
+          width: MediaQuery.of(context).size.width * 0.3,
+          height:  MediaQuery.of(context).size.width * 0.3,
           decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(ImageAssets.splash), fit: BoxFit.contain
