@@ -39,7 +39,7 @@ class RecipeCard2 extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(list[indexOfRecipeList].title,
-                      style: Theme.of(context).textTheme.titleLarge),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize:18 )),
                   Text(list[indexOfRecipeList].categoryTitle,
                       style: Theme.of(context).textTheme.titleMedium),
                 ],

@@ -32,11 +32,11 @@ class AboutDeveloperScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                buildIconButton(url: 'https://www.facebook.com/ebtisam.ashraf.756/',icon: FontAwesomeIcons.facebook),
+                // buildIconButton(url: 'https://www.facebook.com/ebtisam.ashraf.756/',icon: FontAwesomeIcons.facebook),
                 buildIconButton(url: 'https://www.linkedin.com/in/ebtisam-kotb-351381129/',icon: FontAwesomeIcons.linkedin),
                 buildIconButton(url: 'https://api.whatsapp.com/send?phone=02001093038641' ,icon: FontAwesomeIcons.whatsapp),
                 buildIconButton(url: 'https://t.me/Ebtisam29' ,icon: FontAwesomeIcons.telegram),
-                buildIconButton(url: 'mailto:ebtisam25ashraf@gmail.com?subject=News&body=New%20email' ,icon: FontAwesomeIcons.solidEnvelope),
+                buildIconButton(url: 'mailto:ebtisam25ashraf@gmail.com?subject=Mobile%20application&body=I%20want%20a%20mobile%20app%20for..' ,icon: FontAwesomeIcons.solidEnvelope),
 
               ],
             )

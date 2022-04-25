@@ -129,7 +129,7 @@ class AppCubit extends Cubit<AppState> {
    return recipesList;
  }
 
-  bool isDark = false;
+  bool isDark = true;
 
   initDarkMode({ bool? isDarkMode }){
 

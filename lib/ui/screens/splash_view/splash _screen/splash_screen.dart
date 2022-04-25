@@ -25,9 +25,10 @@ class _SplashScreenState extends State<SplashScreen> {
     timer = Timer(const Duration(seconds: 3), nextScreen);
   }
 
+
   nextScreen() {
 
-    bool? isSkip =  SharedPref.getBoolData(key: 'isSkip') ;
+   bool? isSkip =  SharedPref.getBoolData(key: 'isSkip') ;
 
     if(isSkip == true){
       Navigator.pushReplacementNamed(context, Routes.homeScreenRoute,  );

@@ -37,7 +37,17 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => OnBoardingScreen());
 
       case Routes.homeScreenRoute:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
+        return MaterialPageRoute(builder: (_) =>  Builder(
+            builder: (context) {
+              if(MediaQuery.of(context).size.width.toInt() >= 700){
+                return MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1.5),
+                    child: const HomeScreen() );
+              }
+              else {
+                return const HomeScreen();
+              }
+            }
+        ));
 
       case Routes.recipeHomeScreenRoute:
         return MaterialPageRoute(builder: (_) => const RecipesHomeScreen());
