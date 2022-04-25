@@ -1,6 +1,8 @@
 import 'package:avocado_healthy_food/business_logic/app_logic/app_cubit.dart';
 import 'package:avocado_healthy_food/constants/design_constants/colors_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import '../../../constants/data_constants/strings_manager.dart';
 import '../../../constants/routes.dart';
 import '../../../data/model/recipe_model.dart';
 import '../../widgets/recipe_card2.dart';
@@ -36,14 +38,14 @@ class _SearchScreenState extends State<SearchScreen> {
             controller: searchController,
             style: const TextStyle(color: ColorsManager.primaryColorDark),
             cursorColor: ColorsManager.primaryColor,
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.search ,color:ColorsManager.primaryColorDark ),
+            decoration:  InputDecoration(
+              prefixIcon: const Icon(Icons.search ,color:ColorsManager.primaryColorDark ),
               fillColor: ColorsManager.white,
               filled: true,
-              contentPadding: EdgeInsets.symmetric(
+              contentPadding: const EdgeInsets.symmetric(
                 horizontal: 15,
               ),
-              hintText: 'بحث',
+              hintText: StringsManager.search.tr(),
 
             ),
             onChanged: (value) {

@@ -1,9 +1,9 @@
-import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../business_logic/translation_logic/translation_cubit.dart';
+import '../../../constants/data_constants/strings_manager.dart';
 import '../../../constants/design_constants/colors_manager.dart';
 
 
@@ -20,7 +20,7 @@ class LanguageScreen extends StatelessWidget {
     create:  (context) => TranslationCubit(),
      child: Scaffold(
       appBar: AppBar(
-          title: Text("اللغة".tr(),style: Theme.of(context).textTheme.titleLarge)),
+          title: Text(StringsManager.language.tr(),style: Theme.of(context).textTheme.titleLarge)),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: BlocBuilder<TranslationCubit , TranslationState>(
@@ -34,7 +34,6 @@ class LanguageScreen extends StatelessWidget {
                  activeColor: ColorsManager.primaryColor,
                 groupValue:translationCubit.language,
                 onChanged: (Languages? value){
-                  log(value.toString());
                    translationCubit.changeLanguage(value);
 
                 }),
@@ -44,7 +43,6 @@ class LanguageScreen extends StatelessWidget {
                activeColor: ColorsManager.primaryColor,
                 groupValue: translationCubit.language,
                 onChanged: (Languages? value){
-                  log(value.toString());
                    translationCubit.changeLanguage(value);
 
                 }),
@@ -52,7 +50,7 @@ class LanguageScreen extends StatelessWidget {
             Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0 , horizontal: 30),
                 width: MediaQuery.of(context).size.width *0.6,
-                child: ElevatedButton(child: const Text(' تغيير اللغة'),onPressed: (){
+                child: ElevatedButton(child:  Text(StringsManager.changeLanguage.tr()),onPressed: (){
                   context.setLocale(translationCubit.locale);
                 })),
           ],

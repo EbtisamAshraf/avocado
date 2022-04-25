@@ -1,18 +1,20 @@
 import 'package:avocado_healthy_food/constants/routes.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../business_logic/onboarding_logic/onboarding_cubit.dart';
+import '../../../../constants/data_constants/strings_manager.dart';
 import '../../../../constants/design_constants/colors_manager.dart';
 import '../../../../data/model/onboarrding_model.dart';
 
 class CustomIndicator extends StatelessWidget {
-  int indexOfOnBoarding = 0;
-  PageController boardController;
-  List<OnBoardingModel> onBoardingList;
-  bool isLast;
-  OnBoardingCubit onBoardingCubit;
+ final int indexOfOnBoarding ;
+final  PageController boardController;
+ final List<OnBoardingModel> onBoardingList;
+ final bool isLast;
+ final OnBoardingCubit onBoardingCubit;
 
-  CustomIndicator({
+  const CustomIndicator({
     Key? key,
     required this.indexOfOnBoarding,
     required this.onBoardingList,
@@ -42,10 +44,10 @@ class CustomIndicator extends StatelessWidget {
                         Navigator.pushReplacementNamed(
                             context, Routes.homeScreenRoute);
                       },
-                      child: const Text(
-                        'SKIP',
+                      child:  Text(
+                        StringsManager.skip.tr(),
                         textAlign: TextAlign.end,
-                        style: TextStyle(color: ColorsManager.primaryColor),
+                        style: const TextStyle(color: ColorsManager.primaryColor),
                       ),
                     ),
                   ),

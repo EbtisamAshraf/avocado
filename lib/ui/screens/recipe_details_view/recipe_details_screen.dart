@@ -1,6 +1,8 @@
 import 'package:avocado_healthy_food/constants/design_constants/colors_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../business_logic/app_logic/app_cubit.dart';
+import '../../../constants/data_constants/strings_manager.dart';
 import '../../../data/model/recipe_model.dart';
 import '../../widgets/custom_icon_button.dart';
 
@@ -86,7 +88,7 @@ class BuildRecipeIngredients extends StatelessWidget {
         (index) => Container(
           padding: const EdgeInsets.all(3.0),
           // width: MediaQuery.of(context).size.width * 0.20,
-          height: MediaQuery.of(context).size.height * 0.09,
+          // height: MediaQuery.of(context).size.height * 0.09,
           child: Card(
             elevation: 3,
             // shadowColor: ColorsManager.primaryColor,
@@ -180,7 +182,7 @@ class BuildRecipeDetails extends StatelessWidget {
                 const SizedBox(
                   height: 35,
                 ),
-                Text('المكونات',
+                Text(StringsManager.ingredients.tr(),
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall
@@ -193,7 +195,7 @@ class BuildRecipeDetails extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                Text('طريقة التحضير',
+                Text(StringsManager.preparation.tr(),
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall

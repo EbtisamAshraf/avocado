@@ -4,6 +4,7 @@ const String gifPath = 'assets/gif';
 
 class ImageAssets {
   static const String logo = '$imagePath/logo.png';
+  static const String logoAvocado = '$iconPath/logo2.png';
   static const String splash = '$gifPath/splash.gif';
 // onBoarding
   static const String onBoardingImage1 = '$imagePath/splash1.png';

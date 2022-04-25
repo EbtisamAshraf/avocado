@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import '../../../../data/model/onboarrding_model.dart';
 
 class OnBoardingSlider extends StatelessWidget {
-  OnBoardingSlider(this.listOnBoardingSlider, this.index, {Key? key})
+  const OnBoardingSlider(this.listOnBoardingSlider, this.index, {Key? key})
       : super(key: key);
 
-  List<OnBoardingModel> listOnBoardingSlider = [];
-  int index = 0;
+  final List<OnBoardingModel> listOnBoardingSlider ;
+ final  int index ;
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,

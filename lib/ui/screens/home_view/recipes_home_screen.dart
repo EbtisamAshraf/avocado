@@ -1,7 +1,9 @@
 import 'package:avocado_healthy_food/constants/routes.dart';
 import 'package:avocado_healthy_food/ui/widgets/recipe_card2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../business_logic/app_logic/app_cubit.dart';
+import '../../../constants/data_constants/strings_manager.dart';
 import '../../../data/model/recipe_model.dart';
 import '../../widgets/recipe_card.dart';
 
@@ -15,7 +17,7 @@ class RecipesHomeScreen extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Text('الأكثر رواجا',
+          child: Text(StringsManager.mostPopular.tr(),
               style: Theme.of(context).textTheme.headlineSmall),
         ),
         const SizedBox(
@@ -47,32 +49,29 @@ class RecipesHomeScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Text(
-            'موصى به',
+            StringsManager.recommended.tr(),
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
-        Expanded(
-            child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: getRecommendedList(context).length,
-            itemBuilder: (BuildContext context, int index) {
-              return RecipeCard2(
-                indexOfRecipeList: index,
-                list: getRecommendedList(context) as List<RecipeModel>,
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    Routes.recipeDetailsScreenRoute,
-                    arguments:
-                        Arguments(getRecommendedList(context), index.toInt()),
-                  );
-                },
-              );
-            },
-          ),
-        )),
+        Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: List.generate(
+                  getRecommendedList(context).length,
+                  (index) => RecipeCard2(
+                        indexOfRecipeList: index,
+                        list: getRecommendedList(context)
+                            as List<RecipeModel>,
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            Routes.recipeDetailsScreenRoute,
+                            arguments: Arguments(
+                                getRecommendedList(context), index.toInt()),
+                          );
+                        },
+                      )),
+            )),
       ],
     );
   }

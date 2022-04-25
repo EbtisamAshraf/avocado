@@ -1,6 +1,26 @@
 {
 
-  "اللغة":"language"
-
+  "اللغة":"language",
+  "لا يوجد شاشة":"No Route Found",
+  "وجبات":"meals",
+  "سلطات":"salads",
+  "مشروبات":"drinks",
+  "أفــوكـادو":"Avocado",
+  "الأكثر رواجا":"Most Popular",
+  "موصى به":"Recommended",
+  "بحث":"search",
+  "المكونات":"Ingredients",
+  "طريقة التحضير":"Preparation",
+  "عن المطور":"About Developer",
+  "المختارات":"Bookmarks",
+  "الوضع المظلم":"Dark Mode",
+  "الإعدادات":"Settings",
+  "تغيير اللغة":"change Language",
+  "تخطى":"skip",
+  "الرئيسية":"home",
+  "تبحث عن حياة صحية ؟":"Looking for a healthy life?",
+  "تريد وصفات صحية ولذيذة":"Want healthy and delicious recipes?",
+  "حضر بنفسك وجبتك الصحية اللذيذة":"Prepare your own delicious healthy meal",
+  "واستمتع بالمذاق الطيب":"Enjoy the good taste"
 
 }
